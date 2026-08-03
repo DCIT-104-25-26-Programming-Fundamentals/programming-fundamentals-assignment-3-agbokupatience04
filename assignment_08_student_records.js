@@ -84,4 +84,131 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+const readlineSync = require("readline-sync");
+
+// Store all student records
+const students = [];
+
+// 1. Add a student
+function addStudent() {
+    const name = readlineSync.question("Student name: ");
+    const id = Number(readlineSync.question("Student ID: "));
+
+    const numberOfScores = Number(
+        readlineSync.question("How many scores? ")
+    );
+
+    const scores = [];
+
+    for (let i = 0; i < numberOfScores; i++) {
+        const score = Number(
+            readlineSync.question(`Enter score ${i + 1}: `)
+        );
+
+        scores.push(score);
+    }
+
+    const student = {
+        name: name,
+        id: id,
+        scores: scores
+    };
+
+    students.push(student);
+
+    console.log(`Student "${name}" added successfully.`);
+}
+// 2. Display all students
+function displayAllStudents() {
+    if (students.length === 0) {
+        console.log("No students have been added yet.");
+        return;
+    }
+
+    console.log("\n========== ALL STUDENTS ==========");
+
+    students.forEach((student) => {
+        const total = student.scores.reduce(
+            (sum, score) => sum + score,
+            0
+        );
+
+        const average = total / student.scores.length;
+
+        console.log(`Name: ${student.name}`);
+        console.log(`ID: ${student.id}`);
+        console.log(`Scores: ${student.scores.join(", ")}`);
+        console.log(`Average: ${average.toFixed(2)}`);
+        console.log("----------------------------------");
+    });
+}
+
+// 3. Calculate average score for a specific student
+function calculateAverage() {
+    const id = Number(
+        readlineSync.question("Enter student ID: ")
+    );
+
+    const student = students.find(
+        (student) => student.id === id
+    );
+
+    if (!student) {
+        console.log("Student ID not found.");
+        return;
+    }
+
+    const total = student.scores.reduce(
+        (sum, score) => sum + score,
+        0
+    );
+
+    const average = total / student.scores.length;
+
+    console.log(
+        `${student.name}'s average score: ${average.toFixed(2)}
+    `);
+}
+
+// 4. Main menu
+function studentRecordSystem() {
+    let choice;
+
+    do {
+        console.log("\n======================================");
+        console.log("       STUDENT RECORD SYSTEM MENU");
+        console.log("======================================");
+        console.log("1. Add student");
+        console.log("2. Display all students");
+        console.log("3. Calculate average score");
+        console.log("4. Quit");
+
+        choice = readlineSync.question("Enter your choice (1-4): ");
+
+        switch (choice) {
+            case "1":
+                addStudent();
+                break;
+
+            case "2":
+                displayAllStudents();
+                break;
+
+            case "3":
+                calculateAverage();
+                break;
+
+            case "4":
+                console.log("Goodbye!");
+                break;
+
+            default:
+                console.log("Invalid choice. Please enter a number from 1 to 4.");
+        }
+
+    } while (choice !== "4");
+}
+
+// Start the program
+studentRecordSystem();
 
