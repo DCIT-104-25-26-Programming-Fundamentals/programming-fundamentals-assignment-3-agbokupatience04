@@ -59,4 +59,65 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+const readlineSync = require("readline-sync");
+
+// ============================================================
+// PART A - Single Multiplication Table
+// ============================================================
+
+function singleTable(number) {
+    console.log(`\nMultiplication Table for ${number}:`);
+
+    for (let i = 1; i <= 12; i++) {
+        console.log(`${number} x ${i} = ${number * i}`);
+    }
+}
+
+// ============================================================
+// PART B - Tables from 1 to N
+// ============================================================
+
+function tablesFromOneToN(n) {
+    for (let number = 1; number <= n; number++) {
+        console.log(`\nMultiplication Table for ${number}:`);
+
+        for (let i = 1; i <= 12; i++) {
+            console.log(`${number} x ${i} = ${number * i}`);
+        }
+
+        console.log("--------------------");
+    }
+}
+
+// ============================================================
+// MAIN PROGRAM
+// ============================================================
+
+console.log("===== MULTIPLICATION TABLE GENERATOR =====");
+
+// PART A
+console.log("\n===== PART A: SINGLE TABLE =====");
+
+const number = Number(
+    readlineSync.question("Enter a number: ")
+);
+
+if (!Number.isInteger(number)) {
+    console.log("Error: Please enter a valid integer.");
+} else {
+    singleTable(number);
+}
+
+// PART B
+console.log("\n===== PART B: TABLES FROM 1 TO N =====");
+
+const n = Number(
+    readlineSync.question("Enter a positive integer N: ")
+);
+
+if (!Number.isInteger(n) || n <= 0) {
+    console.log("Error: N must be a positive integer.");
+} else {
+    tablesFromOneToN(n);
+}
 
