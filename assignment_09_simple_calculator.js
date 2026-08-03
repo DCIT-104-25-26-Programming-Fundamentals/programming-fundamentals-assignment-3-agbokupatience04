@@ -74,4 +74,165 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+// ============================================================
+// TASK: Console-Based Simple Calculator
+// ============================================================
+
+// Import readline-sync
+const readline = require("readline-sync");
+
+// ------------------------------------------------------------
+// Addition
+// ------------------------------------------------------------
+function addition(firstNumber, secondNumber) {
+    return firstNumber + secondNumber;
+}
+
+// ------------------------------------------------------------
+// Subtraction
+// ------------------------------------------------------------
+function subtraction(firstNumber, secondNumber) {
+    return firstNumber - secondNumber;
+}
+
+// ------------------------------------------------------------
+// Multiplication
+// ------------------------------------------------------------
+function multiplication(firstNumber, secondNumber) {
+    return firstNumber * secondNumber;
+}
+
+// ------------------------------------------------------------
+// Division
+// ------------------------------------------------------------
+function division(firstNumber, secondNumber) {
+    if (secondNumber === 0) {
+        return null;
+    }
+
+    return firstNumber / secondNumber;
+}
+
+// ------------------------------------------------------------
+// Modulus
+// ------------------------------------------------------------
+function modulus(firstNumber, secondNumber) {
+    if (secondNumber === 0) {
+        return null;
+    }
+
+    return firstNumber % secondNumber;
+}
+
+// ------------------------------------------------------------
+// Exponentiation
+// ------------------------------------------------------------
+function exponentiation(firstNumber, secondNumber) {
+    return firstNumber ** secondNumber;
+}
+
+// ------------------------------------------------------------
+// Display calculator menu
+// ------------------------------------------------------------
+function displayMenu() {
+    console.log("\n==============================");
+    console.log("       SIMPLE CALCULATOR");
+    console.log("==============================");
+    console.log("1. Addition");
+    console.log("2. Subtraction");
+    console.log("3. Multiplication");
+    console.log("4. Division");
+    console.log("5. Modulus");
+    console.log("6. Exponentiation");
+    console.log("7. Quit");
+    console.log("==============================");
+}
+
+// ------------------------------------------------------------
+// Main calculator program
+// ------------------------------------------------------------
+function calculator() {
+    let choice;
+
+    do {
+        displayMenu();
+
+        choice = readline.question("Select an operation (1-7): ");
+
+        // Quit
+        if (choice === "7") {
+            console.log("Goodbye!");
+            break;
+        }
+
+        // Check if choice is valid
+        if (!["1", "2", "3", "4", "5", "6"].includes(choice)) {
+            console.log("Invalid choice. Please select a number from 1 to 7.");
+            continue;
+        }
+
+        // Get numbers from user
+        const firstNumber = readline.questionFloat("Enter first number: ");
+        const secondNumber = readline.questionFloat("Enter second number: ");
+
+        let result;
+
+        // Perform selected operation
+        switch (choice) {
+            case "1":
+                result = addition(firstNumber, secondNumber);
+                console.log(`Result: ${firstNumber} + ${secondNumber} = ${result}`);
+                break;
+
+            case "2":
+                result = subtraction(firstNumber, secondNumber);
+                console.log(
+                    `Result: ${firstNumber} - ${secondNumber} = ${result}`
+                );
+                break;
+
+            case "3":
+                result = multiplication(firstNumber, secondNumber);
+                console.log(
+                    `Result: ${firstNumber} * ${secondNumber} = ${result}`
+                );
+                break;
+
+            case "4":
+                result = division(firstNumber, secondNumber);
+
+                if (result === null) {
+                    console.log("Error: Cannot divide by zero.");
+                } else {
+                    console.log(
+                        `Result: ${firstNumber} / ${secondNumber} = ${result.toFixed(2)}`
+                    );
+                }
+                break;
+
+            case "5":
+                result = modulus(firstNumber, secondNumber);
+
+                if (result === null) {
+                    console.log("Error: Cannot divide by zero.");
+                } else {
+                    console.log(
+                        `Result: ${firstNumber} % ${secondNumber} = ${result}`
+                    );
+                }
+                break;
+
+            case "6":
+                result = exponentiation(firstNumber, secondNumber);
+                console.log(
+                    `Result: ${firstNumber} ** ${secondNumber} = ${result}`
+                );
+                break;
+        }
+
+    } while (choice !== "7");
+}
+
+// Start the calculator
+calculator();
 
