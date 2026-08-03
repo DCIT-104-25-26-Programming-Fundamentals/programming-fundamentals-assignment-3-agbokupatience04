@@ -54,4 +54,86 @@
 // YOUR CODE BELOW — remove the // symbols from the scaffold and fill it in
 // =============================================================================
 
+const readlineSync = require("readline-sync");
 
+// =====================================================
+// PART A - Print the First N Terms
+// =====================================================
+
+function printFibonacci(n) {
+    let a = 0;
+    let b = 1;
+
+    let sequence = [];
+
+    for (let i = 0; i < n; i++) {
+        sequence.push(a);
+
+        let next = a + b;
+        a = b;
+        b = next;
+    }
+
+    console.log("Fibonacci sequence:", sequence.join(" "));
+}
+
+
+// =====================================================
+// PART B - Check if a Number Belongs to the Sequence
+// =====================================================
+
+function isFibonacci(number) {
+    let a = 0;
+    let b = 1;
+
+    while (a <= number) {
+        if (a === number) {
+             return true;
+        }
+
+        let next = a + b;
+        a = b;
+        b = next;
+    }
+
+    return false;
+}
+
+
+// =====================================================
+// MAIN PROGRAM
+// =====================================================
+
+console.log("=================================");
+console.log("     FIBONACCI SEQUENCE");
+console.log("=================================");
+
+
+// PART A
+console.log("\nPART A: PRINT FIRST N TERMS");
+
+const n = Number(
+    readlineSync.question("How many terms? ")
+);
+
+if (!Number.isInteger(n) || n <= 0) {
+    console.log("Error: Please enter a positive integer.");
+} else {
+    printFibonacci(n);
+}
+
+
+// PART B
+console.log("\nPART B: CHECK FIBONACCI NUMBER");
+
+const number = Number(
+    readlineSync.question("Enter a number to check: ")
+);
+
+if (!Number.isInteger(number) || number < 0) {
+    console.log("Error: Please enter a non-negative integer.");
+} else if (isFibonacci(number)) {
+    console.log(number + " is a Fibonacci number.");
+} else {
+    console.log(number + " is not a Fibonacci number.");
+}
